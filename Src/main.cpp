@@ -183,6 +183,7 @@ void SystemClock_Config(void)
         flash_led_error(CRITICAL_HAL_ERROR);
         Error_Handler();
   }
+  
 #endif
 }
 
