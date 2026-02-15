@@ -29,6 +29,14 @@ extern "C" {
         }        
     }    
 
+    void EXTI15_10_IRQHandler(void) // For QEI, hardwired to use PA_8 (EXTI8) for index. 
+    {
+        if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_12) != RESET) {
+            __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_12);
+            Interrupt::InvokeHandler(EXTI15_10_IRQn);
+        }        
+    }    
+
     // macro for automatically creating the DMA Stream IRQ handlers, e.g DMA2_Stream0_IRQHandler()
     #define DMA_STREAM_IRQ_HANDLER(DMA_num, DMA_stream, IRQ_n)      \
     void DMA##DMA_num##_Stream##DMA_stream##_IRQHandler(void) {     \
