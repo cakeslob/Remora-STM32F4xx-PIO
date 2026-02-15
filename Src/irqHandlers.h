@@ -14,6 +14,12 @@ extern Pin* thread_debug;
 
 extern "C" {
 
+    void EXTI1_IRQHandler() {
+        if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_1) != RESET) {
+            __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
+            Interrupt::InvokeHandler(EXTI1_IRQn);
+        }
+    }
     void EXTI4_IRQHandler() {
         if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_4) != RESET) {
             __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_4);
